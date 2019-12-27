@@ -1,8 +1,12 @@
 package br.com.crtsistemas.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity(name = "Cliente")
@@ -13,12 +17,13 @@ public class Cliente {
 	private Integer id;
 	@Column(name = "clinome")
 	private String nome;
+	@OneToMany(mappedBy = "cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
 	
-	private Cliente () {
-		
+	public Cliente () {
 	}
 	
-	private Cliente (Integer id) {
+	public Cliente (Integer id) {
 		this.id = id;
 	}
 	
@@ -37,6 +42,13 @@ public class Cliente {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
 	
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
 	
 }
